@@ -12,14 +12,14 @@ pipeline {
         // Stage 2: Build the Maven project
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
         // Stage 3: (Optional) Add more stages like testing or deployment
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
     }
