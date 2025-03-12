@@ -53,10 +53,8 @@ pipeline {
         // Stage 5: Login to Docker Hub
         stage('Login to Docker Hub') {
             steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
-                        echo 'Successfully logged into Docker Hub'
-                    }
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                    sh 'docker login -u carlosrosariocentennial -p Rosalex123@'
                 }
             }
         }
