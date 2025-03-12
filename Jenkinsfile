@@ -62,10 +62,8 @@ pipeline {
         // Stage 6: Push Docker Image to Docker Hub
         stage('Push Docker Image') {
             steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', "${env.DOCKER_HUB_CREDENTIALS}") {
-                        docker.image("${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG}").push()
-                    }
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                 }
             }
         }
